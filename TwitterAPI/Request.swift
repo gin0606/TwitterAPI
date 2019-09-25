@@ -20,16 +20,16 @@ let request = client.get("https://api.twitter.com/1.1/statuses/home_timeline.jso
 open class Request {
 
     /// Original Client
-    open let originalClient: Client
+    public let originalClient: Client
 
     /// Original Request
-    open let originalRequest: URLRequest
+    public let originalRequest: URLRequest
 
     /// REST API Request Task
-    open let task: URLSessionDataTask
+    public let task: URLSessionDataTask
 
     /// REST API Request Task's Delegate
-    open let delegate: TaskDelegate
+    public let delegate: TaskDelegate
 
     /**
     Create a Request Instance
@@ -112,10 +112,10 @@ open class StreamingRequest: NSObject, URLSessionDataDelegate {
     open var task: URLSessionDataTask?
 
     /// Original Request
-    open let originalRequest: URLRequest
+    public let originalRequest: URLRequest
 
     /// Streaming API Delegate
-    open let delegate: StreamingDelegate
+    public let delegate: StreamingDelegate
 
     /**
     Create a StreamingRequest Instance
@@ -198,7 +198,7 @@ open class StreamingDelegate: NSObject, URLSessionDataDelegate {
     open var response: HTTPURLResponse!
 
     /// Streaming API Response data buffer
-    open let scanner = MutableDataScanner(delimiter: "\r\n")
+    public let scanner = MutableDataScanner(delimiter: "\r\n")
 
     /// Streaming API Received JSON Hander
     fileprivate var progress: ProgressHandler?

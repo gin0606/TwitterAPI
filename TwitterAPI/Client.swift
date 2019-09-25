@@ -87,7 +87,7 @@ public extension Client {
 
     - returns: StreamingRequest
     */
-    public func streaming(_ url: String, parameters: Dictionary<String, String> = [:]) -> StreamingRequest {
+    func streaming(_ url: String, parameters: Dictionary<String, String> = [:]) -> StreamingRequest {
         let method: Method = url == "https://stream.twitter.com/1.1/statuses/filter.json" ? .POST : .GET
         return StreamingRequest(makeRequest(method, url: url, parameters: parameters))
     }
@@ -100,7 +100,7 @@ public extension Client {
 
     - returns: RESTRequest
     */
-    public func get(_ url: String, parameters: Dictionary<String, String> = [:]) -> Request {
+    func get(_ url: String, parameters: Dictionary<String, String> = [:]) -> Request {
         return request(.GET, url: url, parameters: parameters)
     }
 
@@ -112,7 +112,7 @@ public extension Client {
 
     - returns: RESTRequest
     */
-    public func post(_ url: String, parameters: Dictionary<String, String> = [:]) -> Request {
+    func post(_ url: String, parameters: Dictionary<String, String> = [:]) -> Request {
         return request(.POST, url: url, parameters: parameters)
     }
 
@@ -129,7 +129,7 @@ public extension Client {
 
     - returns: RESTRequest
     */
-    public func postMedia(_ data: Data) -> Request {
+    func postMedia(_ data: Data) -> Request {
         let media = data.base64EncodedString(options: Data.Base64EncodingOptions(rawValue: 0))
         let url = "https://upload.twitter.com/1.1/media/upload.json"
         return post(url, parameters: ["media": media])
@@ -144,7 +144,7 @@ public extension Client {
 
     - returns: RESTRequest
     */
-    public func request(_ method: Method, url: String, parameters: Dictionary<String, String>) -> Request {
+    func request(_ method: Method, url: String, parameters: Dictionary<String, String>) -> Request {
         return Request(self, request: makeRequest(method, url: url, parameters: parameters))
     }
 }
@@ -157,13 +157,13 @@ open class OAuthClient: Client {
     static var serializeIdentifier = "OAuth"
 
     /// Twitter Consumer Key (API Key)
-    open let consumerKey: String
+    public let consumerKey: String
 
     /// Twitter Consumer Secret (API Secret)
-    open let consumerSecret: String
+    public let consumerSecret: String
 
     /// Twitter Credential (AccessToken)
-    open let oAuthCredential: OAuthSwiftCredential
+    public let oAuthCredential: OAuthSwiftCredential
 
     open var debugDescription: String {
         return "[consumerKey: \(consumerKey), consumerSecret: \(consumerSecret), accessToken: \(oAuthCredential.oauthToken), accessTokenSecret: \(oAuthCredential.oauthTokenSecret)]"
@@ -244,7 +244,7 @@ open class OAuthClient: Client {
 
         static var serializeIdentifier = "Account"
 
-        open let identifier: String
+        public let identifier: String
 
         /// ACAccount
         open var account: ACAccount {
@@ -305,7 +305,7 @@ open class OAuthClient: Client {
         */
         open func makeRequest(_ method: Method, url urlString: String, parameters: Dictionary<String, String>) -> URLRequest {
             let url = URL(string: urlString)!
-            let socialRequest = SLRequest(forServiceType: SLServiceTypeTwitter, requestMethod: method.slValue, url: url as URL!, parameters: parameters)
+            let socialRequest = SLRequest(forServiceType: SLServiceTypeTwitter, requestMethod: method.slValue, url: url, parameters: parameters)
             socialRequest?.account = account
             return socialRequest!.preparedURLRequest()
         }
