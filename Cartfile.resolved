@@ -1,2 +1,2 @@
-github "s-aska/MutableDataScanner" "d5d64b857efcee35e4652f83a22ae8bacdcecf4c"
-github "OAuthSwift/OAuthSwift" "1.0.0"
+github "OAuthSwift/OAuthSwift" "1.4.1"
+github "gin0606/MutableDataScanner" "743014204ed5f4d583ce8d28594b10bbde488b0e"
